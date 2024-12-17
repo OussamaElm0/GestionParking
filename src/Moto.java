@@ -10,6 +10,10 @@ public non-sealed class Moto extends Vehicule{
         this.cylindre = cylindre;
     }
 
+    public String getCylindre(){
+        return cylindre ;
+    }
+
     @Override
     public double calculerTarif(){
         return 1.00;

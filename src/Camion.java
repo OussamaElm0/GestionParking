@@ -10,6 +10,10 @@ public non-sealed class Camion extends Vehicule{
         this.capaciteCharge = capaciteCharge;
     }
 
+    public int getCapaciteCharge(){
+        return capaciteCharge;
+    }
+
     @Override
     public double calculerTarif(){
         return 1.00;

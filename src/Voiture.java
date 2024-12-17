@@ -11,6 +11,10 @@ public non-sealed class Voiture extends Vehicule{
         this.nombrePortes = nbrPortes;
     }
 
+    public int getNombrePortes(){
+        return nombrePortes;
+    }
+
     @Override
     public double calculerTarif(){
         return 1.00;
