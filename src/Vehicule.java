@@ -1,7 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public abstract class Vehicule implements Tarification{
+public sealed abstract class Vehicule
+        permits Moto, Voiture, Camion
+        implements Tarification{
     private String matricule;
     private LocalDateTime heureEntre;
 
