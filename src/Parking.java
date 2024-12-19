@@ -1,14 +1,14 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Parking {
     private static final int MAX_PLACES = 30;
-    private static ArrayList<Vehicule> listeVehicules = new ArrayList<Vehicule>();
+    private static final HashSet<Vehicule> listeVehicules = new HashSet<>(MAX_PLACES);
 
     public static int getMaxPlaces(){
         return MAX_PLACES;
     }
 
-    public static ArrayList<Vehicule> getListeVehicules(){
+    public static HashSet<Vehicule> getListeVehicules(){
         return listeVehicules;
     }
 
