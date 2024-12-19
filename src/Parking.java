@@ -25,19 +25,29 @@ public class Parking {
         return 0;
     }
 
-    public static int retirerVehicule(String matricule){
-        int index = 0;
-        boolean deleted = false;
+    private static Vehicule findByMatricule(String matricule){
+        Vehicule vehiculeToFind = null;
         for(Vehicule vehicule: listeVehicules){
-            boolean isMatricule = vehicule.getMatricule()
+            boolean isMatricule = vehicule
+                    .getMatricule()
                     .equalsIgnoreCase(matricule);
             if(isMatricule){
-                listeVehicules.remove(index);
-                deleted = true;
-                break;
+                vehiculeToFind = vehicule;
             }
-            index++;
         }
+        return vehiculeToFind;
+    }
+
+    public static int retirerVehicule(String matricule){
+        boolean deleted = false;
+
+        Vehicule vehicule = findByMatricule(matricule);
+
+        if(vehicule != null){
+            listeVehicules.remove(vehicule);
+            deleted = true;
+        }
+
         return deleted ? 0 : -1;
     }
 
