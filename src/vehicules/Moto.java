@@ -1,3 +1,5 @@
+package vehicules;
+
 public non-sealed class Moto extends Vehicule{
     private String cylindre;
 

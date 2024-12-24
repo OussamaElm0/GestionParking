@@ -1,3 +1,5 @@
+package vehicules;
+
 public non-sealed class Camion extends Vehicule{
     private int capaciteCharge;
 

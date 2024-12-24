@@ -1,3 +1,5 @@
+package vehicules;
+
 public non-sealed class Voiture extends Vehicule{
     private int nombrePortes;
 
