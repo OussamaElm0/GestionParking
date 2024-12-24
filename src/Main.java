@@ -1,5 +1,8 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
+import factories.*;
+import vehicules.Vehicule;
+import vehicules.VehiculeTypes;
 
 public class Main {
     public static void main(String[] args){
@@ -19,6 +22,7 @@ public class Main {
                         break MAIN_LOOP; // break the while loop
                     case 1 :
                         System.out.println("You've choose to park a vehicule.");
+                        Vehicule vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, "A/29e83");
                         break;
                     case 2:
                         System.out.println("You've choose to remove a vehicule.");

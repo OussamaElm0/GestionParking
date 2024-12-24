@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import vehicules.Vehicule;
 
 public class Parking {
     private static final int MAX_PLACES = 30;

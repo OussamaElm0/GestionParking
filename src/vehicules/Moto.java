@@ -3,11 +3,11 @@ package vehicules;
 public non-sealed class Moto extends Vehicule{
     private String cylindre;
 
-    Moto(String matricule){
+    public Moto(String matricule){
         super(matricule);
     }
 
-    Moto(String matricule, String cylindre){
+    public Moto(String matricule, String cylindre){
         super(matricule);
         this.cylindre = cylindre;
     }
