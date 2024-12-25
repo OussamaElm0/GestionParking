@@ -10,7 +10,12 @@ public non-sealed class Voiture extends Vehicule{
 
     public Voiture(String matricule, int nbrPortes){
         super(matricule);
-        this.nombrePortes = nbrPortes;
+
+        if(nbrPortes != 2 || nbrPortes != 4){
+            this.nombrePortes = 4;
+        } else {
+            this.nombrePortes = nbrPortes;
+        }
     }
 
     public int getNombrePortes(){

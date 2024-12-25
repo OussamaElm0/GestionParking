@@ -22,7 +22,41 @@ public class Main {
                         break MAIN_LOOP; // break the while loop
                     case 1 :
                         System.out.println("You've choose to park a vehicule.");
-                        Vehicule vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, "A/29e83");
+                        Vehicule vehicule = null;
+                        System.out.println("""
+                            Choose vehicul's type by number :
+                            1. Car
+                            2. Moto
+                            3. Truck""");
+                        int vehiculeType = sc.nextInt();
+
+                        switch (vehiculeType){
+                            case 1:
+                                System.out.println("Please enter informations as the following format : {MATRICULE}_{NUMBER OF DOORS}");
+                                String[] vehiculeInformations = sc.next()
+                                        .split("_");
+
+                                try {
+                                    if (vehiculeInformations.length == 2) {
+                                        vehicule = VehiculeFactory.createVehicule(VehiculeTypes.VOITURE, vehiculeInformations[0], Integer.parseInt(vehiculeInformations[1]));
+                                    } else if (vehiculeInformations.length == 1) {
+                                        vehicule = VehiculeFactory.createVehicule(VehiculeTypes.VOITURE, vehiculeInformations[0]);
+                                    }
+                                    Parking.ajouterVehicule(vehicule);
+                                    System.out.println("Car parked successfully!");
+                                    System.out.println("Free places : " + Parking.placeDisponible());
+                                } catch (NumberFormatException e) {
+                                    System.out.println("The second parameter must be an integer");
+                                }
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                System.out.println("Sorry the number provided isn't available!");
+                        }
+
                         break;
                     case 2:
                         System.out.println("You've choose to remove a vehicule.");
