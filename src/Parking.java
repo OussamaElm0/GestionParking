@@ -13,12 +13,12 @@ public class Parking {
         return listeVehicules;
     }
 
-    public static int placeDisponible(){
+    public static int placesDisponibles(){
         return MAX_PLACES - listeVehicules.size();
     }
 
     public static int ajouterVehicule(Vehicule vehicule){
-        int placesDispo = Parking.placeDisponible();
+        int placesDispo = Parking.placesDisponibles();
         if(placesDispo <= 0){
             return -1;
         }

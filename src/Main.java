@@ -45,7 +45,7 @@ public class Main {
                                     }
                                     Parking.ajouterVehicule(vehicule);
                                     System.out.println("Car parked successfully!");
-                                    System.out.println("Free places : " + Parking.placeDisponible());
+                                    System.out.println("Free places : " + Parking.placesDisponibles());
                                 } catch (NumberFormatException e) {
                                     System.out.println("The second parameter must be an integer");
                                 }
@@ -62,9 +62,26 @@ public class Main {
                                 }
                                 Parking.ajouterVehicule(vehicule);
                                 System.out.println("Moto parked successfully!");
-                                System.out.println("Free places : " + Parking.placeDisponible());
+                                System.out.println("Free places : " + Parking.placesDisponibles());
                                 break;
                             case 3:
+                                System.out.println("Please enter informations as the following format : {MATRICULE}_{CHARGE CAPACITY}");
+                                vehiculeInformations = sc.next()
+                                        .split("_");
+
+                                try{
+                                    if(vehiculeInformations.length == 1){
+                                        vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, vehiculeInformations[0]);
+                                    } else if(vehiculeInformations.length == 2){
+                                        vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, vehiculeInformations[0], vehiculeInformations[1]);
+                                    }
+                                    Parking.ajouterVehicule(vehicule);
+                                    System.out.println("Truck parked successfully!");
+                                    System.out.println("Free places : " + Parking.placesDisponibles());
+                                } catch (ClassCastException e) {
+                                    System.out.println("The second parameter must be an integer");
+                                }
+
                                 break;
                             default:
                                 System.out.println("Sorry the number provided isn't available!");
