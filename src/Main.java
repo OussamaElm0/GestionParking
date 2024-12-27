@@ -29,11 +29,12 @@ public class Main {
                             2. Moto
                             3. Truck""");
                         int vehiculeType = sc.nextInt();
+                        String[] vehiculeInformations;
 
                         switch (vehiculeType){
                             case 1:
                                 System.out.println("Please enter informations as the following format : {MATRICULE}_{NUMBER OF DOORS}");
-                                String[] vehiculeInformations = sc.next()
+                                 vehiculeInformations = sc.next()
                                         .split("_");
 
                                 try {
@@ -50,6 +51,18 @@ public class Main {
                                 }
                                 break;
                             case 2:
+                                System.out.println("Please enter informations as the following format : {MATRICULE}_{CYLINDRE}");
+                                vehiculeInformations = sc.next()
+                                        .split("_");
+
+                                if(vehiculeInformations.length == 1){
+                                    vehicule = VehiculeFactory.createVehicule(VehiculeTypes.MOTO,vehiculeInformations[0]);
+                                } else if (vehiculeInformations.length == 2) {
+                                    vehicule = VehiculeFactory.createVehicule(VehiculeTypes.MOTO, vehiculeInformations[0], vehiculeInformations[1]);
+                                }
+                                Parking.ajouterVehicule(vehicule);
+                                System.out.println("Moto parked successfully!");
+                                System.out.println("Free places : " + Parking.placeDisponible());
                                 break;
                             case 3:
                                 break;
