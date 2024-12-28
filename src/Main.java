@@ -3,6 +3,7 @@ import java.util.*;
 import factories.*;
 import vehicules.Vehicule;
 import vehicules.VehiculeTypes;
+import exceptions.VehiculeNotFound;
 
 public class Main {
     public static void main(String[] args){
@@ -89,10 +90,24 @@ public class Main {
 
                         break;
                     case 2:
-                        System.out.println("You've choose to remove a vehicule.");
+                        System.out.println("You've choose to remove a vehicle.");
+                        System.out.println("Please enter MATRICULE of the vehicle");
+                        try {
+                            String matricule = sc.next();
+                            int vehiculeToFind = Parking.retirerVehicule(matricule);
+                            if(vehiculeToFind < 0){
+                                throw new VehiculeNotFound("Vehicule with this matricule doesn't exist");
+                            }
+
+                            System.out.println("Vehicule taked away successfully!");
+                            System.out.println("Free places : " + Parking.placesDisponibles());
+                        } catch (VehiculeNotFound e) {
+                            System.out.println(e);
+                        }
+
                         break;
                     case 3:
-                        System.out.println("You've choose to display parked vehicules.");
+                        System.out.println("You've choose to display parked vehicles.");
                         break;
                     default:
                         System.out.println("Sorry! this option isn't available.");
