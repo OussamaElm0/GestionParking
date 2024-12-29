@@ -1,5 +1,8 @@
+package parking;
+
 import java.util.HashSet;
 import vehicules.Vehicule;
+import exceptions.MatriculAlreadyExist;
 
 public class Parking {
     private static final int MAX_PLACES = 30;
@@ -37,6 +40,16 @@ public class Parking {
             }
         }
         return vehiculeToFind;
+    }
+
+    public static void checkMatriculeExist(String matricule) throws MatriculAlreadyExist{
+
+        Vehicule vehicule = findByMatricule(matricule);
+
+        if (vehicule != null){
+            throw new MatriculAlreadyExist("The provided matricul already exist");
+        }
+
     }
 
     public static int retirerVehicule(String matricule){

@@ -1,6 +1,7 @@
 import java.util.*;
 
 import factories.*;
+import parking.Parking;
 import vehicules.Vehicule;
 import vehicules.VehiculeTypes;
 import exceptions.VehiculeNotFound;
@@ -44,9 +45,12 @@ public class Main {
                                     } else if (vehiculeInformations.length == 1) {
                                         vehicule = VehiculeFactory.createVehicule(VehiculeTypes.VOITURE, vehiculeInformations[0]);
                                     }
+                                    /*
                                     Parking.ajouterVehicule(vehicule);
                                     System.out.println("Car parked successfully!");
                                     System.out.println("Free places : " + Parking.placesDisponibles());
+                                     */
+                                    vehicule.park();
                                 } catch (NumberFormatException e) {
                                     System.out.println("The second parameter must be an integer");
                                 }
