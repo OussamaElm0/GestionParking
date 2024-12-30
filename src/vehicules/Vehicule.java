@@ -37,5 +37,10 @@ public sealed abstract class Vehicule
         }
     }
 
+    @Override
+    public String toString(){
+        return "Type: " + this.getClass().getName() + " | " + "Matricule: " + this.matricule + "    "  ;
+    }
+
     public abstract double calculerTarif();
 }

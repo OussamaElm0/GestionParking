@@ -65,4 +65,12 @@ public class Parking {
         return deleted ? 0 : -1;
     }
 
+    public static void displayParking(){
+        int index = 0;
+
+        for(Vehicule vehicule: listeVehicules){
+            System.out.println((++index)  + "- " + vehicule);
+        }
+    }
+
 }

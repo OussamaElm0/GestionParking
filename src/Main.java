@@ -103,6 +103,7 @@ public class Main {
                         break;
                     case 3:
                         System.out.println("You've choose to display parked vehicles.");
+                        Parking.displayParking();
                         break;
                     default:
                         System.out.println("Sorry! this option isn't available.");
