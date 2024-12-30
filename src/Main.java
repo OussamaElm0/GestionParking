@@ -45,11 +45,6 @@ public class Main {
                                     } else if (vehiculeInformations.length == 1) {
                                         vehicule = VehiculeFactory.createVehicule(VehiculeTypes.VOITURE, vehiculeInformations[0]);
                                     }
-                                    /*
-                                    Parking.ajouterVehicule(vehicule);
-                                    System.out.println("Car parked successfully!");
-                                    System.out.println("Free places : " + Parking.placesDisponibles());
-                                     */
                                     vehicule.park();
                                 } catch (NumberFormatException e) {
                                     System.out.println("The second parameter must be an integer");
@@ -65,9 +60,7 @@ public class Main {
                                 } else if (vehiculeInformations.length == 2) {
                                     vehicule = VehiculeFactory.createVehicule(VehiculeTypes.MOTO, vehiculeInformations[0], vehiculeInformations[1]);
                                 }
-                                Parking.ajouterVehicule(vehicule);
-                                System.out.println("Moto parked successfully!");
-                                System.out.println("Free places : " + Parking.placesDisponibles());
+                                vehicule.park();
                                 break;
                             case 3:
                                 System.out.println("Please enter informations as the following format : {MATRICULE}_{CHARGE CAPACITY}");
@@ -80,9 +73,7 @@ public class Main {
                                     } else if(vehiculeInformations.length == 2){
                                         vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, vehiculeInformations[0], vehiculeInformations[1]);
                                     }
-                                    Parking.ajouterVehicule(vehicule);
-                                    System.out.println("Truck parked successfully!");
-                                    System.out.println("Free places : " + Parking.placesDisponibles());
+                                    vehicule.park();
                                 } catch (ClassCastException e) {
                                     System.out.println("The second parameter must be an integer");
                                 }
