@@ -1,5 +1,8 @@
 package vehicules;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public non-sealed class Moto extends Vehicule{
     private String cylindre;
 
@@ -18,6 +21,11 @@ public non-sealed class Moto extends Vehicule{
 
     @Override
     public double calculerTarif(){
-        return 1.00;
+        //Calculate how long a vehicle is parked
+        LocalDateTime now = LocalDateTime.now();
+        long duration = Duration.between(getHeureEntre(), now)
+                .toHours();
+
+        return 2.50 * (duration + 1);
     }
 }
