@@ -1,5 +1,8 @@
 package vehicules;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public non-sealed class Voiture extends Vehicule{
     private int nombrePortes;
 
@@ -22,8 +25,16 @@ public non-sealed class Voiture extends Vehicule{
         return nombrePortes;
     }
 
+    public void a(){
+        System.out.println(getHeureEntre());
+    }
     @Override
     public double calculerTarif(){
-        return 1.00;
+        //Calculate how long a vehicle is parked
+        LocalDateTime now = LocalDateTime.now();
+        long duration = Duration.between(getHeureEntre(), now)
+                .toHours();
+
+        return 5.00 * ( duration + 1);
     }
 }

@@ -59,6 +59,8 @@ public class Parking {
 
         if(vehicule != null){
             listeVehicules.remove(vehicule);
+            double tarif = vehicule.calculerTarif();
+            System.out.println("The tarif of this vehicle is : " + tarif + "MAD");
             deleted = true;
         }
 

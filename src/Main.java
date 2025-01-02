@@ -5,6 +5,7 @@ import parking.Parking;
 import vehicules.Vehicule;
 import vehicules.VehiculeTypes;
 import exceptions.VehiculeNotFound;
+import vehicules.Voiture;
 
 public class Main {
     public static void main(String[] args){
