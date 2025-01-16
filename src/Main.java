@@ -9,34 +9,33 @@ import vehicules.Voiture;
 
 public class Main {
     public static void main(String[] args){
+        Locale currentLocale = Locale.getDefault();
+        ResourceBundle bundle = ResourceBundle.getBundle("ressources.messages", currentLocale);
+
         Scanner sc = new Scanner(System.in);
         int choice;
 
-        System.out.println("Welcome to our parking management application!");
+        System.out.println(bundle.getString("welcome_message").replace("{0}", currentLocale.toString()));
         MAIN_LOOP : while(true){ // giving the loop a name to avoid break issues within the switch statement
-            displayMenuOptions();
+            displayMenuOptions(bundle);
 
             try {
                 choice = sc.nextInt();
 
                 switch (choice){
                     case 0:
-                        System.out.println("See you next time \uD83D\uDE01. Goodbye!");
+                        System.out.println(bundle.getString("goodbye_message"));
                         break MAIN_LOOP; // break the while loop
                     case 1 :
-                        System.out.println("You've choose to park a vehicule.");
+                        System.out.println(bundle.getString("park_vehicle"));
                         Vehicule vehicule = null;
-                        System.out.println("""
-                            Choose vehicul's type by number :
-                            1. Car
-                            2. Moto
-                            3. Truck""");
+                        System.out.println(bundle.getString("choose_type"));
                         int vehiculeType = sc.nextInt();
                         String[] vehiculeInformations;
 
                         switch (vehiculeType){
                             case 1:
-                                System.out.println("Please enter informations as the following format : {MATRICULE}_{NUMBER OF DOORS}");
+                                System.out.println(bundle.getString("enter_information_format_car"));
                                  vehiculeInformations = sc.next()
                                         .split("_");
 
@@ -48,11 +47,11 @@ public class Main {
                                     }
                                     vehicule.park();
                                 } catch (NumberFormatException e) {
-                                    System.out.println("The second parameter must be an integer");
+                                    System.out.println(bundle.getString("number_format_error"));
                                 }
                                 break;
                             case 2:
-                                System.out.println("Please enter informations as the following format : {MATRICULE}_{CYLINDRE}");
+                                System.out.println(bundle.getString("enter_information_format_moto"));
                                 vehiculeInformations = sc.next()
                                         .split("_");
 
@@ -64,7 +63,7 @@ public class Main {
                                 vehicule.park();
                                 break;
                             case 3:
-                                System.out.println("Please enter informations as the following format : {MATRICULE}_{CHARGE CAPACITY}");
+                                System.out.println(bundle.getString("enter_information_format_truck"));
                                 vehiculeInformations = sc.next()
                                         .split("_");
 
@@ -76,56 +75,55 @@ public class Main {
                                     }
                                     vehicule.park();
                                 } catch (ClassCastException e) {
-                                    System.out.println("The second parameter must be an integer");
+                                    System.out.println(bundle.getString("number_format_error"));
                                 }
 
                                 break;
                             default:
-                                System.out.println("Sorry the number provided isn't available!");
+                                System.out.println(bundle.getString("option_not_available"));
                         }
 
                         break;
                     case 2:
-                        System.out.println("You've choose to remove a vehicle.");
-                        System.out.println("Please enter MATRICULE of the vehicle");
+                        System.out.println(bundle.getString("remove_vehicle"));
+                        System.out.println(bundle.getString("enter_matricule"));
                         try {
                             String matricule = sc.next();
                             int vehiculeToFind = Parking.retirerVehicule(matricule);
                             if(vehiculeToFind < 0){
-                                throw new VehiculeNotFound("Vehicule with this matricule doesn't exist");
+                                throw new VehiculeNotFound(bundle.getString("vehicle_not_found"));
                             }
 
-                            System.out.println("Vehicule taked away successfully!");
-                            System.out.println("Free places : " + Parking.placesDisponibles());
+                            System.out.println(bundle.getString("vehicle_removed"));
+                            System.out.println(
+                                    bundle.getString("free_places")
+                                            .replace("{0}", Integer.toString(Parking.placesDisponibles()))
+                            );
                         } catch (VehiculeNotFound e) {
                             System.out.println(e);
                         }
 
                         break;
                     case 3:
-                        System.out.println("You've choose to display parked vehicles.");
+                        System.out.println(bundle.getString("display_parking"));
                         Parking.displayParking();
                         break;
                     default:
-                        System.out.println("Sorry! this option isn't available.");
+                        System.out.println(bundle.getString("option_not_available"));
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error: Invalid input. Please enter a number.");
+                System.out.println(bundle.getString("invalid_input"));
             } finally {
                 sc.nextLine(); // Consume the input to prevent the loop from getting stuck
             }
         }
     }
 
-    private static void displayMenuOptions(){
+    private static void displayMenuOptions(ResourceBundle bundle){
         System.out.println("""
                 -----------------------------------------------------------
-                Choose by number :
-                0. To quit
-                1. Park a vehicule
-                2. Remove a car from parking
-                3. Display parking
-                -----------------------------------------------------------""");
+                """ + bundle.getString("choose_menu") + """
+                \n-----------------------------------------------------------""");
     }
 }
