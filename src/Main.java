@@ -108,6 +108,10 @@ public class Main {
                         System.out.println(bundle.getString("display_parking"));
                         Parking.displayParking();
                         break;
+                    case 4:
+                        System.out.println(bundle.getString("display_amount"));
+                        System.out.println(Parking.getTotalAmount());
+                        break;
                     default:
                         System.out.println(bundle.getString("option_not_available"));
                         break;

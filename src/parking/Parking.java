@@ -16,6 +16,14 @@ public class Parking {
         return listeVehicules;
     }
 
+    public static double getTotalAmount(){
+        double totalAmount = listeVehicules.stream()
+                .mapToDouble(Vehicule::calculerTarif)
+                .sum();
+
+        return totalAmount;
+    }
+
     public static int placesDisponibles(){
         return MAX_PLACES - listeVehicules.size();
     }
