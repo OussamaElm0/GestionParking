@@ -1,7 +1,7 @@
 package vehicules;
 
-import exceptions.MatriculAlreadyExist;
+import exceptions.MatriculAlreadyExistException;
 
 public interface Parkable {
-    void park() throws MatriculAlreadyExist;
+    void park() throws MatriculAlreadyExistException;
 }

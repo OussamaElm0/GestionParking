@@ -1,6 +1,6 @@
 package vehicules;
 
-import exceptions.MatriculAlreadyExist;
+import exceptions.MatriculAlreadyExistException;
 
 import java.time.LocalDateTime;
 import parking.Parking;
@@ -26,13 +26,13 @@ public sealed abstract class Vehicule
     }
 
     @Override
-    public void park() throws MatriculAlreadyExist {
+    public void park() throws MatriculAlreadyExistException {
         try {
             Parking.checkMatriculeExist(this.matricule);
             Parking.ajouterVehicule(this);
             System.out.println("Car parked successfully!");
             System.out.println("Free places : " + Parking.placesDisponibles());
-        } catch (MatriculAlreadyExist e){
+        } catch (MatriculAlreadyExistException e){
             System.out.println(e);
         }
     }

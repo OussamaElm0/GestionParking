@@ -5,9 +5,12 @@ import factories.*;
 import parking.Parking;
 import vehicules.Vehicule;
 import vehicules.VehiculeTypes;
-import exceptions.VehiculeNotFound;
+import exceptions.VehiculeNotFoundException;
 import exceptions.ParkingEmptyException;
 import vehicules.Voiture;
+
+//TODO  -categorize messages
+//      -add logs for debugging
 
 public class Main {
     public static  Locale currentLocale = Locale.getDefault();
@@ -95,7 +98,7 @@ public class Main {
                             String matricule = sc.next();
                             int vehiculeToFind = Parking.retirerVehicule(matricule);
                             if(vehiculeToFind < 0){
-                                throw new VehiculeNotFound(bundle.getString("vehicle_not_found"));
+                                throw new VehiculeNotFoundException(bundle.getString("vehicle_not_found"));
                             }
 
                             System.out.println(bundle.getString("vehicle_removed"));
@@ -103,7 +106,7 @@ public class Main {
                                     bundle.getString("free_places")
                                             .replace("{0}", Integer.toString(Parking.placesDisponibles()))
                             );
-                        } catch (VehiculeNotFound e) {
+                        } catch (VehiculeNotFoundException e) {
                             System.out.println(e);
                         }
 

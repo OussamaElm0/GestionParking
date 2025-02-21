@@ -3,7 +3,7 @@ package parking;
 import java.util.HashSet;
 import com.parking_management.Main;
 import vehicules.Vehicule;
-import exceptions.MatriculAlreadyExist;
+import exceptions.MatriculAlreadyExistException;
 import exceptions.ParkingEmptyException;
 
 public class Parking {
@@ -52,12 +52,12 @@ public class Parking {
         return vehiculeToFind;
     }
 
-    public static void checkMatriculeExist(String matricule) throws MatriculAlreadyExist{
+    public static void checkMatriculeExist(String matricule) throws MatriculAlreadyExistException{
 
         Vehicule vehicule = findByMatricule(matricule);
 
         if (vehicule != null){
-            throw new MatriculAlreadyExist("The provided matricul already exist");
+            throw new MatriculAlreadyExistException("The provided matricul already exist");
         }
 
     }
