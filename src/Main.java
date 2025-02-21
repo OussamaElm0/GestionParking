@@ -1,16 +1,20 @@
-import java.util.*;
+package com.parking_management;
 
+import java.util.*;
 import factories.*;
 import parking.Parking;
 import vehicules.Vehicule;
 import vehicules.VehiculeTypes;
 import exceptions.VehiculeNotFound;
+import exceptions.ParkingEmptyException;
 import vehicules.Voiture;
 
 public class Main {
+    public static  Locale currentLocale = Locale.getDefault();
+    public static ResourceBundle bundle = ResourceBundle.getBundle("ressources.messages", currentLocale);
+
     public static void main(String[] args){
-        Locale currentLocale = Locale.getDefault();
-        ResourceBundle bundle = ResourceBundle.getBundle("ressources.messages", currentLocale);
+
 
         Scanner sc = new Scanner(System.in);
         int choice;
@@ -106,7 +110,11 @@ public class Main {
                         break;
                     case 3:
                         System.out.println(bundle.getString("display_parking"));
-                        Parking.displayParking();
+                        try {
+                            Parking.displayParking();
+                        } catch (ParkingEmptyException e){
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     case 4:
                         System.out.println(bundle.getString("display_amount"));

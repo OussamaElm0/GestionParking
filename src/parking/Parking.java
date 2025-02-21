@@ -1,8 +1,10 @@
 package parking;
 
 import java.util.HashSet;
+import com.parking_management.Main;
 import vehicules.Vehicule;
 import exceptions.MatriculAlreadyExist;
+import exceptions.ParkingEmptyException;
 
 public class Parking {
     private static final int MAX_PLACES = 30;
@@ -75,11 +77,15 @@ public class Parking {
         return deleted ? 0 : -1;
     }
 
-    public static void displayParking(){
-        int index = 0;
+    public static void displayParking() throws ParkingEmptyException{
+        if (listeVehicules.size() == 0){
+            throw new ParkingEmptyException(Main.bundle.getString("parking_empty"));
+        } else {
+            int index = 0;
 
-        for(Vehicule vehicule: listeVehicules){
-            System.out.println((++index)  + "- " + vehicule);
+            for(Vehicule vehicule: listeVehicules){
+                System.out.println((++index)  + "- " + vehicule);
+            }
         }
     }
 
