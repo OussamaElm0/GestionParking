@@ -9,6 +9,7 @@ import exceptions.ParkingEmptyException;
 public class Parking {
     private static final int MAX_PLACES = 30;
     private static final HashSet<Vehicule> listeVehicules = new HashSet<>(MAX_PLACES);
+    private static double totalAmount = 0.0;
 
     public static int getMaxPlaces(){
         return MAX_PLACES;
@@ -19,10 +20,6 @@ public class Parking {
     }
 
     public static double getTotalAmount(){
-        double totalAmount = listeVehicules.stream()
-                .mapToDouble(Vehicule::calculerTarif)
-                .sum();
-
         return totalAmount;
     }
 
@@ -36,6 +33,7 @@ public class Parking {
             return -1;
         }
         listeVehicules.add(vehicule);
+        totalAmount += vehicule.calculerTarif();
         return 0;
     }
 
