@@ -1,6 +1,9 @@
 package com.parking_management;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.*;
+
 import factories.*;
 import parking.Parking;
 import vehicules.Vehicule;
@@ -15,43 +18,66 @@ import vehicules.Voiture;
 public class Main {
     public static  Locale currentLocale = Locale.getDefault();
     public static ResourceBundle bundle = ResourceBundle.getBundle("ressources.messages", currentLocale);
+    public static final Logger logger = Logger.getLogger(Main.class.getName());
 
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int choice;
+    public static void main(String[] args) throws IOException {
+        try {
+            // Remove default console handler
+            Logger rootLogger = Logger.getLogger("");
+            rootLogger.removeHandler(rootLogger.getHandlers()[0]);
 
-        System.out.println(bundle.getString("welcome_message").replace("{0}", currentLocale.toString()));
-        MAIN_LOOP : while(true){ // giving the loop a name to avoid break issues within the switch statement
-            displayMenuOptions(bundle);
+            //Create and configure a file handler
+            FileHandler fileHandler = new FileHandler("app.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            fileHandler.setLevel(Level.ALL);
+            logger.setLevel(Level.ALL);
 
-            try {
-                choice = sc.nextInt();
+            Scanner sc = new Scanner(System.in);
+            int choice;
 
-                switch (choice){
-                    case 0:
-                        System.out.println(bundle.getString("goodbye_message"));
-                        break MAIN_LOOP; // break the while loop
-                    case 1 :
-                        parkVehicleOption(sc);
-                        break;
-                    case 2:
-                        removeVehicleOption(sc);
-                        break;
-                    case 3:
-                        displayParkingOption();
-                        break;
-                    case 4:
-                        displayTotalAmountOption();
-                        break;
-                    default:
-                        System.out.println(bundle.getString("option_not_available"));
-                        break;
+            System.out.println(bundle.getString("welcome_message").replace("{0}", currentLocale.toString()));
+            MAIN_LOOP : while(true){ // giving the loop a name to avoid break issues within the switch statement
+                displayMenuOptions(bundle);
+
+                try {
+                    choice = sc.nextInt();
+
+                    switch (choice){
+                        case 0:
+                            logger.info("User disconnected!");
+                            System.out.println(bundle.getString("goodbye_message"));
+                            break MAIN_LOOP; // break the while loop
+                        case 1 :
+                            logger.info("Chosen option: Park vehicle");
+                            parkVehicleOption(sc);
+                            break;
+                        case 2:
+                            logger.info("Chosen option: Remove vehicle");
+                            removeVehicleOption(sc);
+                            break;
+                        case 3:
+                            logger.info("Chosen option: Display parking");
+                            displayParkingOption();
+                            break;
+                        case 4:
+                            logger.info("Chosen option: Display total amount");
+                            displayTotalAmountOption();
+                            break;
+                        default:
+                            logger.severe("Option not found: " + choice);
+                            System.out.println(bundle.getString("option_not_available"));
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    logger.severe("Input mismatch: " + e);
+                    System.out.println(bundle.getString("invalid_input"));
+                } finally {
+                    sc.nextLine(); // Consume the input to prevent the loop from getting stuck
                 }
-            } catch (InputMismatchException e) {
-                System.out.println(bundle.getString("invalid_input"));
-            } finally {
-                sc.nextLine(); // Consume the input to prevent the loop from getting stuck
             }
+        } catch (IOException e){
+            logger.severe("Error occured: " + e);
         }
     }
 
