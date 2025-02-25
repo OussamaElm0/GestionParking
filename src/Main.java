@@ -110,6 +110,7 @@ public class Main {
                     vehicule.park();
                 } catch (NumberFormatException e) {
                     System.out.println(bundle.getString("number_format_error"));
+                    logger.severe(e.getClass() + ": " + e.getLocalizedMessage());
                 }
                 break;
             case 2:
@@ -138,6 +139,7 @@ public class Main {
                     vehicule.park();
                 } catch (ClassCastException e) {
                     System.out.println(bundle.getString("number_format_error"));
+                    logger.severe(e.getClass() + ": " + e.getLocalizedMessage());
                 }
 
                 break;
