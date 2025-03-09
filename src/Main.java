@@ -97,6 +97,7 @@ public class Main {
 
         switch (vehiculeType){
             case 1:
+                logger.info("Park Vehicle Option chosen: Car");
                 System.out.println(bundle.getString("enter_information_format_car"));
                 vehiculeInformations = sc.next()
                         .split("_");
@@ -108,12 +109,14 @@ public class Main {
                         vehicule = VehiculeFactory.createVehicule(VehiculeTypes.VOITURE, vehiculeInformations[0]);
                     }
                     vehicule.park();
+                    logger.info("Vehicle parked successfully. Car: " + vehicule.getMatricule());
                 } catch (NumberFormatException e) {
                     System.out.println(bundle.getString("number_format_error"));
                     logger.severe(e.getClass() + ": " + e.getLocalizedMessage());
                 }
                 break;
             case 2:
+                logger.info("Park Vehicle Option chosen: Moto");
                 System.out.println(bundle.getString("enter_information_format_moto"));
                 vehiculeInformations = sc.next()
                         .split("_");
@@ -124,8 +127,10 @@ public class Main {
                     vehicule = VehiculeFactory.createVehicule(VehiculeTypes.MOTO, vehiculeInformations[0], vehiculeInformations[1]);
                 }
                 vehicule.park();
+                logger.info("Vehicle parked successfully. Moto: " + vehicule.getMatricule());
                 break;
             case 3:
+                logger.info("Park Vehicle Option chosen: Truck");
                 System.out.println(bundle.getString("enter_information_format_truck"));
                 vehiculeInformations = sc.next()
                         .split("_");
@@ -137,6 +142,7 @@ public class Main {
                         vehicule = VehiculeFactory.createVehicule(VehiculeTypes.CAMION, vehiculeInformations[0], vehiculeInformations[1]);
                     }
                     vehicule.park();
+                    logger.info("Vehicle parked successfully, Truck: " + vehicule.getMatricule());
                 } catch (ClassCastException e) {
                     System.out.println(bundle.getString("number_format_error"));
                     logger.severe(e.getClass() + ": " + e.getLocalizedMessage());
@@ -145,6 +151,7 @@ public class Main {
                 break;
             default:
                 System.out.println(bundle.getString("option_not_available"));
+                logger.warning("Park Vehicle chosen: Invalid option");
         }
     }
 
