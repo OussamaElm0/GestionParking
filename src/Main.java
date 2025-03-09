@@ -165,12 +165,14 @@ public class Main {
                 throw new VehiculeNotFoundException(bundle.getString("vehicle_not_found"));
             }
 
+            logger.info("Vehicle removed successfully. Vehicle: " + matricule);
             System.out.println(bundle.getString("vehicle_removed"));
             System.out.println(
                     bundle.getString("free_places")
                             .replace("{0}", Integer.toString(Parking.placesDisponibles()))
             );
         } catch (VehiculeNotFoundException e) {
+            logger.severe("Remove Vehicle Option: Vehicle not found!");
             System.out.println(e);
         }
     }
