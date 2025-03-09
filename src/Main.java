@@ -182,6 +182,7 @@ public class Main {
         try {
             Parking.displayParking();
         } catch (ParkingEmptyException e){
+            logger.severe("Display Parking Option: Parking is empty");
             System.out.println(e.getMessage());
         }
     }
